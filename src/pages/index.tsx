@@ -9,6 +9,7 @@ import { stripe } from '~/services/stripe'
 import { HomeContainer, Product } from '~/styles/pages/home'
 
 import 'keen-slider/keen-slider.min.css'
+import Link from 'next/link'
 
 interface HomeProps {
   products: {
@@ -31,19 +32,25 @@ export default function Home({ products }: HomeProps) {
   return (
     <HomeContainer ref={sliderRef} className="keen-slider">
       {products.map((product) => (
-        <Product className="keen-slider__slide" key={String(product.id)}>
-          <Image
-            src={product.imageUrl}
-            width={520}
-            height={520}
-            alt={product.name}
-          />
+        <Link
+          href={`/product/${product.id}}`}
+          key={String(product.id)}
+          className="keen-slider__slide"
+        >
+          <Product>
+            <Image
+              src={product.imageUrl}
+              width={520}
+              height={520}
+              alt={product.name}
+            />
 
-          <footer>
-            <strong>{product.name}</strong>
-            <span>{product.price}</span>
-          </footer>
-        </Product>
+            <footer>
+              <strong>{product.name}</strong>
+              <span>{product.price}</span>
+            </footer>
+          </Product>
+        </Link>
       ))}
     </HomeContainer>
   )
