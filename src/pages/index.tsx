@@ -17,7 +17,7 @@ interface HomeProps {
     name: string
     description: string
     imageUrl: string
-    price: number
+    price: string
   }[]
 }
 
@@ -33,7 +33,7 @@ export default function Home({ products }: HomeProps) {
     <HomeContainer ref={sliderRef} className="keen-slider">
       {products.map((product) => (
         <Link
-          href={`/product/${product.id}}`}
+          href={`/product/${product.id}`}
           key={String(product.id)}
           className="keen-slider__slide"
         >
@@ -72,7 +72,7 @@ export const getStaticProps: GetStaticProps = async () => {
       price: new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
-      }).format(price.unit_amount ? price.unit_amount / 100 : 0),
+      }).format(price.unit_amount / 100),
     }
   })
 
