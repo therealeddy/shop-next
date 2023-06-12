@@ -1,21 +1,13 @@
-import 'dotenv/config'
-import { z } from 'zod'
-
-const envSchema = z.object({
-  NODE_ENV: z
-    .enum(['development', 'test', 'production'])
-    .default('development'),
-  NEXT_URL: z.string(),
-  STRIPE_PUBLIC_KEY: z.string(),
-  STRIPE_SECRET_KEY: z.string(),
-})
-
-const _env = envSchema.safeParse(process.env)
-
-if (_env.success === false) {
-  console.error('❌ Invalid environment variables', _env.error.format())
-
-  throw new Error('Invalid environment variables.')
+interface EnvProps {
+  NODE_ENV: 'development' | 'test' | 'production'
+  APP_URL: string
+  STRIPE_PUBLIC_KEY: string
+  STRIPE_SECRET_KEY: string
 }
 
-export const env = _env.data
+export const env: EnvProps = {
+  NODE_ENV: process.env.NODE_ENV,
+  APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+  STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY,
+  STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+}
