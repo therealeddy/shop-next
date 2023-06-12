@@ -12,6 +12,7 @@
   "dependencies": {
     "@stitches/react": "^1.2.8",
     "@vercel/analytics": "^1.0.1",
+    "axios": "^1.4.0",
     "dotenv": "^16.1.4",
     "keen-slider": "^6.8.5",
     "next": "13.4.4",
