@@ -10,6 +10,7 @@ import { HomeContainer, Product } from '~/styles/pages/home'
 
 import 'keen-slider/keen-slider.min.css'
 import Link from 'next/link'
+import Head from 'next/head'
 
 interface HomeProps {
   products: {
@@ -30,30 +31,36 @@ export default function Home({ products }: HomeProps) {
   })
 
   return (
-    <HomeContainer ref={sliderRef} className="keen-slider">
-      {products.map((product) => (
-        <Link
-          key={String(product.id)}
-          href={`/product/${product.id}`}
-          prefetch={false}
-          className="keen-slider__slide"
-        >
-          <Product>
-            <Image
-              src={product.imageUrl}
-              width={520}
-              height={520}
-              alt={product.name}
-            />
+    <>
+      <Head>
+        <title>Home | Shop Next</title>
+      </Head>
 
-            <footer>
-              <strong>{product.name}</strong>
-              <span>{product.price}</span>
-            </footer>
-          </Product>
-        </Link>
-      ))}
-    </HomeContainer>
+      <HomeContainer ref={sliderRef} className="keen-slider">
+        {products.map((product) => (
+          <Link
+            key={String(product.id)}
+            href={`/product/${product.id}`}
+            prefetch={false}
+            className="keen-slider__slide"
+          >
+            <Product>
+              <Image
+                src={product.imageUrl}
+                width={520}
+                height={520}
+                alt={product.name}
+              />
+
+              <footer>
+                <strong>{product.name}</strong>
+                <span>{product.price}</span>
+              </footer>
+            </Product>
+          </Link>
+        ))}
+      </HomeContainer>
+    </>
   )
 }
 
